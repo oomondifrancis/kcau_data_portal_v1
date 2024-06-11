@@ -11,3 +11,7 @@ typer
 python
 pandas
 matplotlib
+PIL
+base64
+streamlit
+plotly
