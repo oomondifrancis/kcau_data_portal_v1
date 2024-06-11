@@ -15,3 +15,4 @@ PIL
 base64
 streamlit
 plotly
+from research_support import show_research_support_page
