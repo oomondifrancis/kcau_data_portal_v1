@@ -68,8 +68,8 @@ def show_research_support_page():
     fig.update_traces(pull=[0.1]*len(df_june), hole=0.3)
     st.plotly_chart(fig, use_container_width=True)
 
-    st.write("### Tagline")
-    st.markdown("**Developed by the Division of Research Innovation and Outreach**")
+    #st.write("### Tagline")
+    #st.markdown("**Developed by the Division of Research Innovation and Outreach**")
 
     if st.button("Back to Research Innovation and Outreach"):
         st.session_state.page = "department_details"
