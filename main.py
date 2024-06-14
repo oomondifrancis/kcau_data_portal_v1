@@ -3,7 +3,7 @@
 import streamlit as st
 from PIL import Image
 import base64
-from research_support import show_research_support_page  # Ensure correct import
+from research_support import show_research_support_page 
 
 # Initialize session state for login
 if 'logged_in' not in st.session_state:
@@ -36,7 +36,7 @@ departments = {
 }
 
 # Set page config for title and layout
-st.set_page_config(page_title="KCA University Data Portal", layout="centered")
+st.set_page_config(page_title="KCA University Bureau of Statistics", layout="centered")
 
 # Apply custom CSS for the theme
 st.markdown("""
@@ -104,7 +104,7 @@ def show_login_sidebar():
     logo = Image.open("kcau_logo.png")  # Ensure this path is correct
     st.sidebar.image(logo, width=150)
     st.sidebar.title("Login")
-    st.sidebar.write("You are required to log in to access the KCAU data portal")
+    st.sidebar.write("You are required to log in to access the KCAU Platform")
     username = st.sidebar.text_input("Username")
     password = st.sidebar.text_input("Password", type="password")
     if st.sidebar.button("Login"):
@@ -118,9 +118,9 @@ def show_sidebar_after_login():
 
 # Department Selection Page
 def show_department_selection_page():
-    st.markdown("<h1 class='centered-text'>KCA University Data Portal</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 class='centered-text'>KCA University Bureau of Statistics</h1>", unsafe_allow_html=True)
     st.markdown("<h2 class='centered-text'>Welcome</h2>", unsafe_allow_html=True)
-    st.markdown("<div class='welcome-message'>The KCAU Data Portal serves as a central repository for integrated, university-wide data, providing a single source of truth for all academic and administrative units. This platform aims to enhance data-driven decision-making by offering comprehensive, accurate, and timely data. By leveraging the power of data analytics, the portal empowers stakeholders to make informed decisions that drive academic excellence, operational efficiency, and strategic planning. The KCAU Data Portal is an essential tool in our commitment to transparency, accountability, and continuous improvement in the higher education landscape..</div>", unsafe_allow_html=True)
+    st.markdown("<div class='welcome-message'>The KCA University Bureau of Statistics serves as a central repository for integrated, university-wide data, providing a single source of truth for all academic and administrative units. This platform aims to enhance data-driven decision-making by offering comprehensive, accurate, and timely data. By leveraging the power of data analytics, the portal empowers stakeholders to make informed decisions that drive academic excellence, operational efficiency, and strategic planning. The KCAU Data Portal is an essential tool in our commitment to transparency, accountability, and continuous improvement in the higher education landscape..</div>", unsafe_allow_html=True)
 
     for department in departments:
         if st.sidebar.button(department):
@@ -129,7 +129,7 @@ def show_department_selection_page():
 
 # Department Details Page
 def show_department_details_page():
-    st.markdown(f"<h1 class='centered-text'>KCA University Data Portal - {st.session_state.selected_department}</h1>", unsafe_allow_html=True)
+    st.markdown(f"<h1 class='centered-text'>KCA University Bureau of Statistics - {st.session_state.selected_department}</h1>", unsafe_allow_html=True)
     subdivisions = departments[st.session_state.selected_department]
     if subdivisions:
         st.write("Directorates/Departments/Schools:")
