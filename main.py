@@ -3,7 +3,8 @@
 import streamlit as st
 from PIL import Image
 import base64
-from research_support import show_research_support_page 
+from research_support import show_research_support_page
+from admissions import show_admissions_page  # Import the admissions function
 
 # Initialize session state for login
 if 'logged_in' not in st.session_state:
@@ -29,7 +30,7 @@ def login(username, password):
 departments = {
     "Research Innovation and Outreach": ["Research Support", "Innovation and Incubation", "Collaborations and Partnerships"],
     "Enrollment Directorate": [],
-    "Office of the Registra": ["Admissions Office", "Examinations Office"],
+    "Office of the Registrar": ["Admissions Office", "Examinations Office"],
     "Directorate of Alumni": [],
     "Student Affairs": [],
     "Schools": ["School of Business", "School of Technology", "School of Education", "PPTI"]
@@ -138,6 +139,8 @@ def show_department_details_page():
                 st.session_state.selected_sub_department = subdivision
                 if subdivision == "Research Support":
                     st.session_state.page = "research_support"
+                elif subdivision == "Admissions Office":
+                    st.session_state.page = "admissions"  # Add a page for admissions
                 else:
                     st.write(f"{subdivision} Page still under Development...")
     else:
@@ -160,3 +163,5 @@ else:
         show_department_details_page()
     elif st.session_state.page == "research_support":
         show_research_support_page()  # Call the function from the imported module
+    elif st.session_state.page == "admissions":
+        show_admissions_page()  # Call the function from the imported module
