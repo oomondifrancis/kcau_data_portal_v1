@@ -45,7 +45,7 @@ def show_admissions_page():
     # Function to plot the bar graph for Cohorts Gender Count
     def plot_cohorts_gender_count():
         # Load the gender cohorts data
-        df_gender = pd.read_csv('/home/fochieng/projects/kcau_data_portal_v1/data/processed/gender_cohorts.csv')
+        df_gender = pd.read_csv('gender_cohorts.csv')
 
         # Pivot the data for plotting
         df_pivot = df_gender.pivot(index='Cohorts', columns='Gender', values='Count').fillna(0)
