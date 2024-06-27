@@ -5,6 +5,12 @@ from PIL import Image
 import base64
 from research_support import show_research_support_page
 from admissions import show_admissions_page  # Import the admissions function
+from enrollment import show_enrollment_page
+from pillar1 import show_pillar1_page
+from pillar2 import show_pillar2_page
+from pillar3 import show_pillar3_page
+from pillar4 import show_pillar4_page
+from pillar5 import show_pillar5_page
 
 # Initialize session state for login
 if 'logged_in' not in st.session_state:
@@ -29,11 +35,21 @@ def login(username, password):
 # Define the departments and their subdivisions
 departments = {
     "Research Innovation and Outreach": ["Research Support", "Innovation and Incubation", "Collaborations and Partnerships"],
-    "Enrollment Directorate": [],
+    "Enrollment Directorate": ["Enrollment"],
     "Office of the Registrar": ["Admissions Office", "Examinations Office"],
-    "Directorate of Alumni": [],
-    "Student Affairs": [],
-    "Schools": ["School of Business", "School of Technology", "School of Education", "PPTI"]
+    "Directorate of Alumni": ["Tracer Studies"],
+    "Student Affairs": ["Student Life Activities"],
+    "Schools": ["School of Business", "School of Technology", "School of Education", "PPTI"],
+    "Faculty/Staff Report":["Academic","Non-Academic"],
+    "Common Data Sets":["Enrollment Rates/Numbers","Graduation Rates",
+                        "First Year Admissions",
+                        "Transfers In & Out","Annual Revenue & Annual Expenses",
+                        "Financial Aid/Fundraising","Credit Transfers"],
+    "Strategic Pillar Metrics":["Pillar 1: Excellence in Teaching & Learning",
+                                "Pillar 2: Research, Entrepreneurship & Commercialisation",
+                                "Pillar 3: Resource Mobilization, Optimisation & Sustainability",
+                                "Pillar 4: Digital Transformation",
+                                "Pillar 5: Stakeholders Engagement"]
 }
 
 # Set page config for title and layout
@@ -98,11 +114,11 @@ def add_bg_from_local(image_file):
     )
 
 # Add background image
-add_bg_from_local('background_image.png')  # Ensure this path is correct
+add_bg_from_local('background_image.png')
 
 # Login Sidebar
 def show_login_sidebar():
-    logo = Image.open("kcau_logo.png")  # Ensure this path is correct
+    logo = Image.open("kcau_logo.png")
     st.sidebar.image(logo, width=150)
     st.sidebar.title("Login")
     st.sidebar.write("You are required to log in to access the KCAU Platform")
@@ -115,13 +131,13 @@ def show_login_sidebar():
 # Sidebar after login
 def show_sidebar_after_login():
     st.sidebar.title("Log in Successful!")
-    st.sidebar.write(f"Welcome {st.session_state.username}, please select a Division, Directorate, or Department to proceed.")
+    st.sidebar.write(f"Welcome {st.session_state.username}, Please Make a Selection to Proceed:")
 
 # Department Selection Page
 def show_department_selection_page():
     st.markdown("<h1 class='centered-text'>KCA University Bureau of Statistics</h1>", unsafe_allow_html=True)
     st.markdown("<h2 class='centered-text'>Welcome</h2>", unsafe_allow_html=True)
-    st.markdown("<div class='welcome-message'>The KCA University Bureau of Statistics serves as a central repository for integrated, university-wide data, providing a single source of truth for all academic and administrative units. This platform aims to enhance data-driven decision-making by offering comprehensive, accurate, and timely data. By leveraging the power of data analytics, the portal empowers stakeholders to make informed decisions that drive academic excellence, operational efficiency, and strategic planning. The KCAU Data Portal is an essential tool in our commitment to transparency, accountability, and continuous improvement in the higher education landscape..</div>", unsafe_allow_html=True)
+    st.markdown("<div class='welcome-message'>The KCA University Bureau of Statistics serves as a central repository for integrated, university-wide data, providing a single source of truth for all academic and administrative units. This platform aims to enhance data-driven decision-making by offering comprehensive, accurate, and timely data. By leveraging the power of data analytics, the portal empowers stakeholders to make informed decisions that drive academic excellence, operational efficiency, and strategic planning. The KCAU Data Portal is an essential tool in our commitment to transparency, accountability, and continuous improvement in the higher education landscape.</div>", unsafe_allow_html=True)
 
     for department in departments:
         if st.sidebar.button(department):
@@ -133,7 +149,7 @@ def show_department_details_page():
     st.markdown(f"<h1 class='centered-text'>KCA University Bureau of Statistics - {st.session_state.selected_department}</h1>", unsafe_allow_html=True)
     subdivisions = departments[st.session_state.selected_department]
     if subdivisions:
-        st.write("Directorates/Departments/Schools:")
+        st.write("KCA University Data Portals:")
         for subdivision in subdivisions:
             if st.button(subdivision):
                 st.session_state.selected_sub_department = subdivision
@@ -141,6 +157,18 @@ def show_department_details_page():
                     st.session_state.page = "research_support"
                 elif subdivision == "Admissions Office":
                     st.session_state.page = "admissions"  # Add a page for admissions
+                elif subdivision == "Enrollment":
+                    st.session_state.page = "enrollment" #Add Enrollment Page
+                elif subdivision == "Pillar 1: Excellence in Teaching & Learning":
+                    st.session_state.page = "pillar1" #Add Enrollment Page
+                elif subdivision == "Pillar 2: Research, Entrepreneurship & Commercialisation":
+                    st.session_state.page = "pillar2" #Add pillar 2 Page
+                elif subdivision == "Pillar 3: Research, Resource Mobilization, Optimisation & Sustainability":
+                    st.session_state.page = "pillar3" #Add pillar 3 Page
+                elif subdivision == "Pillar 4: Digital Transformation":
+                    st.session_state.page = "pillar4" #Add pillar 4 Page
+                elif subdivision == "Pillar 5: Stakeholders Engagement":
+                    st.session_state.page = "pillar5" #Add pillar 5 Page
                 else:
                     st.write(f"{subdivision} Page still under Development...")
     else:
@@ -165,3 +193,15 @@ else:
         show_research_support_page()  # Call the function from the imported module
     elif st.session_state.page == "admissions":
         show_admissions_page()  # Call the function from the imported module
+    elif st.session_state.page == "enrollment":
+        show_enrollment_page()  # Call the function from the imported module
+    elif st.session_state.page == "pillar1":
+        show_pillar1_page()  # Call the function from the imported module
+    elif st.session_state.page == "pillar2":
+        show_pillar2_page()  # Call the function from the imported module
+    elif st.session_state.page == "pillar3":
+        show_pillar3_page()  # Call the function from the imported module
+    elif st.session_state.page == "pillar4":
+        show_pillar4_page()  # Call the function from the imported module
+    elif st.session_state.page == "pillar5":
+        show_pillar5_page()  # Call the function from the imported module
