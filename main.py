@@ -9,6 +9,7 @@ from pillar2 import show_pillar2_page
 from pillar3 import show_pillar3_page
 from pillar4 import show_pillar4_page
 from pillar5 import show_pillar5_page
+from ppti import show_ppti_page
 
 # Initialize session state for login
 if 'logged_in' not in st.session_state:
@@ -32,18 +33,58 @@ def login(username, password):
 
 # Define the departments and their subdivisions
 departments = {
-    "Division of Research Innovation and Outreach": ["Research Support", "Innovation and Incubation", "Collaborations and Partnerships"],
-    "Division of Finance Planning &": ["Enrollment"],
-    "Division of Academic and Student Affairs": {
-        "Office of the Registrar": ["Admissions Office", "Examinations Office"],
-        "Directorate of Alumni": ["Tracer Studies"],
-        "Student Affairs": ["Student Life Activities"],
-        "Schools": ["School of Business", "School of Technology", "School of Education", "PPTI"],
-        "Faculty/Staff Report": ["Academic", "Non-Academic"]
+    "Division of Research Innovation and Outreach": [
+        "Research Support", 
+        "Innovation and Incubation", 
+        "Collaborations and Partnerships"
+    ],
+    "Division of Finance Planning & Development": {
+        "Enrollment": ["Enrollment Demographics"],
+        "Faculty/Staff Report": [
+            "Academic", 
+            "Non-Academic"
+        ]
     },
-    "Campuses": ['Main Campus (Ruaraka)', 'Town Campus', 'Kitengela Campus', 'Western Campus (Kisumu)'],
-    "Common Data Sets": ["Enrollment Rates/Numbers", "Graduation Rates", "First Year Admissions", "Transfers In & Out", "Annual Revenue & Annual Expenses", "Financial Aid/Fundraising", "Credit Transfers"],
-    "Strategic Pillar Metrics": ["Pillar 1: Excellence in Teaching & Learning", "Pillar 2: Research, Entrepreneurship & Commercialisation", "Pillar 3: Resource Mobilization, Optimisation & Sustainability", "Pillar 4: Digital Transformation", "Pillar 5: Stakeholders Engagement"]
+    "Division of Academic and Student Affairs": {
+        "Office of the Registrar": [
+            "Admissions Office", 
+            "Examinations Office"
+        ],
+        "Directorate of Alumni": [
+            "Tracer Studies"
+        ],
+        "Student Affairs": [
+            "Student Life Activities"
+        ],
+        "Schools": [
+            "School of Business", 
+            "School of Technology", 
+            "School of Education", 
+            "PPTI"
+        ]
+    },
+    "Campuses": [
+        "Main Campus (Ruaraka)", 
+        "Town Campus", 
+        "Kitengela Campus", 
+        "Western Campus (Kisumu)"
+    ],
+    "Common Data Sets": [
+        "Enrollment Rates/Numbers", 
+        "Graduation Rates", 
+        "First Year Admissions", 
+        "Transfers In & Out", 
+        "Annual Revenue & Annual Expenses", 
+        "Financial Aid/Fundraising", 
+        "Credit Transfers"
+    ],
+    "Strategic Pillar Metrics": [
+        "Pillar 1: Excellence in Teaching & Learning", 
+        "Pillar 2: Research, Entrepreneurship & Commercialisation", 
+        "Pillar 3: Resource Mobilization, Optimisation & Sustainability", 
+        "Pillar 4: Digital Transformation", 
+        "Pillar 5: Stakeholders Engagement"
+    ]
 }
 
 # Set page config for title and layout
@@ -54,10 +95,11 @@ st.markdown("""
     <style>
     body {
         background-color: #001f3f;
-        color: #996515;
+        color: #ffffff;  /* White font color for better visibility */
     }
     .stApp {
         background-color: #001f3f;
+        color: #ffffff;  /* White font color for better visibility */
     }
     .stButton>button {
         background-color: #996515;
@@ -165,6 +207,8 @@ def show_department_details_page():
                             st.session_state.page = "pillar4"
                         elif value == "Pillar 5: Stakeholders Engagement":
                             st.session_state.page = "pillar5"
+                        elif value == "PPTI":
+                            st.session_state.page = "ppti"
                         else:
                             st.write(f"{value} Page still under Development...")
     else:
@@ -188,6 +232,8 @@ def show_department_details_page():
                     st.session_state.page = "pillar4"
                 elif subdivision == "Pillar 5: Stakeholders Engagement":
                     st.session_state.page = "pillar5"
+                elif subdivision == "PPTI":
+                    st.session_state.page = "ppti"
                 else:
                     st.write(f"{subdivision} Page still under Development...")
     if st.button("Back"):
@@ -222,3 +268,5 @@ else:
         show_pillar4_page()  # Call the function from the imported module
     elif st.session_state.page == "pillar5":
         show_pillar5_page()  # Call the function from the imported module
+    elif st.session_state.page == "ppti":
+        show_ppti_page()  # Call the function from the imported module
