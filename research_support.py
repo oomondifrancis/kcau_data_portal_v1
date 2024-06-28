@@ -71,7 +71,7 @@ def show_research_support_page():
     #st.write("### Tagline")
     #st.markdown("**Developed by the Division of Research Innovation and Outreach**")
 
-    if st.button("Back to Research Innovation and Outreach"):
+    if st.button("Back"):
         st.session_state.page = "department_details"
 
 # Run the app
