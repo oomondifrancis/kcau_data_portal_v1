@@ -1,5 +1,3 @@
-# main.py
-
 import streamlit as st
 from PIL import Image
 import base64
@@ -34,22 +32,18 @@ def login(username, password):
 
 # Define the departments and their subdivisions
 departments = {
-    "Research Innovation and Outreach": ["Research Support", "Innovation and Incubation", "Collaborations and Partnerships"],
-    "Enrollment Directorate": ["Enrollment"],
-    "Office of the Registrar": ["Admissions Office", "Examinations Office"],
-    "Directorate of Alumni": ["Tracer Studies"],
-    "Student Affairs": ["Student Life Activities"],
-    "Schools": ["School of Business", "School of Technology", "School of Education", "PPTI"],
-    "Faculty/Staff Report":["Academic","Non-Academic"],
-    "Common Data Sets":["Enrollment Rates/Numbers","Graduation Rates",
-                        "First Year Admissions",
-                        "Transfers In & Out","Annual Revenue & Annual Expenses",
-                        "Financial Aid/Fundraising","Credit Transfers"],
-    "Strategic Pillar Metrics":["Pillar 1: Excellence in Teaching & Learning",
-                                "Pillar 2: Research, Entrepreneurship & Commercialisation",
-                                "Pillar 3: Resource Mobilization, Optimisation & Sustainability",
-                                "Pillar 4: Digital Transformation",
-                                "Pillar 5: Stakeholders Engagement"]
+    "Division of Research Innovation and Outreach": ["Research Support", "Innovation and Incubation", "Collaborations and Partnerships"],
+    "Division of Finance Planning &": ["Enrollment"],
+    "Division of Academic and Student Affairs": {
+        "Office of the Registrar": ["Admissions Office", "Examinations Office"],
+        "Directorate of Alumni": ["Tracer Studies"],
+        "Student Affairs": ["Student Life Activities"],
+        "Schools": ["School of Business", "School of Technology", "School of Education", "PPTI"],
+        "Faculty/Staff Report": ["Academic", "Non-Academic"]
+    },
+    "Campuses": ['Main Campus (Ruaraka)', 'Town Campus', 'Kitengela Campus', 'Western Campus (Kisumu)'],
+    "Common Data Sets": ["Enrollment Rates/Numbers", "Graduation Rates", "First Year Admissions", "Transfers In & Out", "Annual Revenue & Annual Expenses", "Financial Aid/Fundraising", "Credit Transfers"],
+    "Strategic Pillar Metrics": ["Pillar 1: Excellence in Teaching & Learning", "Pillar 2: Research, Entrepreneurship & Commercialisation", "Pillar 3: Resource Mobilization, Optimisation & Sustainability", "Pillar 4: Digital Transformation", "Pillar 5: Stakeholders Engagement"]
 }
 
 # Set page config for title and layout
@@ -139,16 +133,41 @@ def show_department_selection_page():
     st.markdown("<h2 class='centered-text'>Welcome</h2>", unsafe_allow_html=True)
     st.markdown("<div class='welcome-message'>The KCA University Bureau of Statistics serves as a central repository for integrated, university-wide data, providing a single source of truth for all academic and administrative units. This platform aims to enhance data-driven decision-making by offering comprehensive, accurate, and timely data. By leveraging the power of data analytics, the portal empowers stakeholders to make informed decisions that drive academic excellence, operational efficiency, and strategic planning. The KCAU Data Portal is an essential tool in our commitment to transparency, accountability, and continuous improvement in the higher education landscape.</div>", unsafe_allow_html=True)
 
-    for department in departments:
-        if st.sidebar.button(department):
-            st.session_state.selected_department = department
-            st.session_state.page = "department_details"
+    selected_department = st.selectbox("Select a Department", list(departments.keys()))
+    st.session_state.selected_department = selected_department
+    if st.button("Proceed"):
+        st.session_state.page = "department_details"
 
 # Department Details Page
 def show_department_details_page():
     st.markdown(f"<h1 class='centered-text'>KCA University Bureau of Statistics - {st.session_state.selected_department}</h1>", unsafe_allow_html=True)
     subdivisions = departments[st.session_state.selected_department]
-    if subdivisions:
+    
+    if isinstance(subdivisions, dict):
+        for key, values in subdivisions.items():
+            with st.expander(key):
+                for value in values:
+                    if st.button(value):
+                        st.session_state.selected_sub_department = value
+                        if value == "Research Support":
+                            st.session_state.page = "research_support"
+                        elif value == "Admissions Office":
+                            st.session_state.page = "admissions"
+                        elif value == "Enrollment":
+                            st.session_state.page = "enrollment"
+                        elif value == "Pillar 1: Excellence in Teaching & Learning":
+                            st.session_state.page = "pillar1"
+                        elif value == "Pillar 2: Research, Entrepreneurship & Commercialisation":
+                            st.session_state.page = "pillar2"
+                        elif value == "Pillar 3: Resource Mobilization, Optimisation & Sustainability":
+                            st.session_state.page = "pillar3"
+                        elif value == "Pillar 4: Digital Transformation":
+                            st.session_state.page = "pillar4"
+                        elif value == "Pillar 5: Stakeholders Engagement":
+                            st.session_state.page = "pillar5"
+                        else:
+                            st.write(f"{value} Page still under Development...")
+    else:
         st.write("KCA University Data Portals:")
         for subdivision in subdivisions:
             if st.button(subdivision):
@@ -156,23 +175,21 @@ def show_department_details_page():
                 if subdivision == "Research Support":
                     st.session_state.page = "research_support"
                 elif subdivision == "Admissions Office":
-                    st.session_state.page = "admissions"  # Add a page for admissions
+                    st.session_state.page = "admissions"
                 elif subdivision == "Enrollment":
-                    st.session_state.page = "enrollment" #Add Enrollment Page
+                    st.session_state.page = "enrollment"
                 elif subdivision == "Pillar 1: Excellence in Teaching & Learning":
-                    st.session_state.page = "pillar1" #Add Enrollment Page
+                    st.session_state.page = "pillar1"
                 elif subdivision == "Pillar 2: Research, Entrepreneurship & Commercialisation":
-                    st.session_state.page = "pillar2" #Add pillar 2 Page
-                elif subdivision == "Pillar 3: Research, Resource Mobilization, Optimisation & Sustainability":
-                    st.session_state.page = "pillar3" #Add pillar 3 Page
+                    st.session_state.page = "pillar2"
+                elif subdivision == "Pillar 3: Resource Mobilization, Optimisation & Sustainability":
+                    st.session_state.page = "pillar3"
                 elif subdivision == "Pillar 4: Digital Transformation":
-                    st.session_state.page = "pillar4" #Add pillar 4 Page
+                    st.session_state.page = "pillar4"
                 elif subdivision == "Pillar 5: Stakeholders Engagement":
-                    st.session_state.page = "pillar5" #Add pillar 5 Page
+                    st.session_state.page = "pillar5"
                 else:
                     st.write(f"{subdivision} Page still under Development...")
-    else:
-        st.write("No subdivisions available")
     if st.button("Back"):
         st.session_state.page = "home"
 
