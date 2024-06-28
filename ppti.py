@@ -22,7 +22,7 @@ def load_data(file_path):
 
 def show_ppti_page():
     # Load data
-    file_path = '/home/fochieng/projects/kcau_data_portal_v1/data/external/PPTT_numbers.csv'
+    file_path = 'PPTT_numbers.csv'
     ppti = load_data(file_path)
 
     # Streamlit App
