@@ -10,6 +10,11 @@ from pillar3 import show_pillar3_page
 from pillar4 import show_pillar4_page
 from pillar5 import show_pillar5_page
 from ppti import show_ppti_page
+from staffcount import show_staffcount_page
+from maincampus import show_maincampus_page
+from towncampus import show_towncampus_page
+from westerncampus import show_westerncampus_page
+from kitengelacampus import show_kitengelacampus_page
 
 # Initialize session state for login
 if 'logged_in' not in st.session_state:
@@ -41,8 +46,8 @@ departments = {
     "Division of Finance Planning & Development": {
         "Enrollment": ["Enrollment Demographics"],
         "Faculty/Staff Report": [
-            "Academic", 
-            "Non-Academic"
+            "Academic and Non-Academic Staff Count", 
+            
         ]
     },
     "Division of Academic and Student Affairs": {
@@ -209,6 +214,17 @@ def show_department_details_page():
                             st.session_state.page = "pillar5"
                         elif value == "PPTI":
                             st.session_state.page = "ppti"
+                        elif value =="Academic and Non-Academic Staff Count":
+                            st.session_state.page = "staffcount"
+                        elif value == "Main Campus (Ruaraka)":
+                            st.session_state.page = "maincampus"
+                        elif value == "Town Campus":
+                            st.session_state.page = "towncampus"
+                        elif value == "Western Campus (Kisumu)":
+                            st.session_state.page = "westerncampus" 
+                        elif value == "Kitengela Campus":
+                            st.session_state.page = "kitengelacampus"                          
+                        
                         else:
                             st.write(f"{value} Page still under Development...")
     else:
@@ -234,6 +250,16 @@ def show_department_details_page():
                     st.session_state.page = "pillar5"
                 elif subdivision == "PPTI":
                     st.session_state.page = "ppti"
+                elif subdivision =="Academic and Non-Academic Staff Count":
+                    st.session_state.page = "staffcount"  
+                elif subdivision == "Main Campus (Ruaraka)":
+                    st.session_state.page = "maincampus"
+                elif subdivision == "Town Campus":
+                    st.session_state.page = "towncampus"
+                elif subdivision == "Western Campus (Kisumu)":
+                    st.session_state.page = "westerncampus" 
+                elif subdivision == "Kitengela Campus":
+                    st.session_state.page = "kitengelacampus"                    
                 else:
                     st.write(f"{subdivision} Page still under Development...")
     if st.button("Back"):
@@ -270,3 +296,13 @@ else:
         show_pillar5_page()  # Call the function from the imported module
     elif st.session_state.page == "ppti":
         show_ppti_page()  # Call the function from the imported module
+    elif st.session_state.page == "staffcount":
+        show_staffcount_page()  # Call the function from the imported moduleshow_staffcount_page
+    elif st.session_state.page == "maincampus":
+        show_maincampus_page()  # Call the function from the imported moduleshow_staffcount_page
+    elif st.session_state.page == "towncampus":
+        show_towncampus_page()  # Call the function from the imported moduleshow_staffcount_page
+    elif st.session_state.page == "westerncampus":
+        show_westerncampus_page()  # Call the function from the imported moduleshow_staffcount_page
+    elif st.session_state.page == "kitengelacampus":
+        show_kitengelacampus_page()  # Call the function from the imported moduleshow_staffcount_page
