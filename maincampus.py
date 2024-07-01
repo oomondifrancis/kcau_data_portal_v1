@@ -15,7 +15,7 @@ def show_maincampus_page():
     )
     
     #Data Upload
-    df = pd.read_csv('/home/fochieng/projects/kcau_data_portal_v1/data/interim/new_2017_2024_data.csv')
+    df = pd.read_csv('new_2017_2024_data.csv')
         
     #Data preprocessing
     #1. Filter out Main Campus Data
