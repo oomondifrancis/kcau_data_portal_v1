@@ -8,12 +8,12 @@ import plotly.express as px
 
 def show_research_support_page():
     # Provided data for Research Opportunities Posted (January - June 2024)
-    months = ["January", "February", "March", "April", "May", "June"]
-    grants = [26, 27, 59, 64, 50, 16]
-    innovation_grants = [1, 2, 16, 7, 5, 6]
-    conferences = [14, 21, 30, 30, 24, 12]
-    workshops_fellowships = [2, 6, 18, 19, 19, 6]
-    scholarships = [12, 18, 38, 30, 24, 12]
+    months = ["January", "February", "March", "April", "May", "June","July","August","September"]
+    grants = [26, 27, 59, 64, 50, 16,13,18,16]
+    innovation_grants = [1, 2, 16, 7, 5, 6,5,7,4]
+    conferences = [14, 21, 30, 30, 24, 12,9,11,13]
+    workshops_fellowships = [2, 6, 18, 19, 19, 6,5,8,9]
+    scholarships = [12, 18, 38, 30, 24, 12,11,10,9]
 
     # Create dataframes
     research_data = {
@@ -30,14 +30,14 @@ def show_research_support_page():
     st.title('Research Support & Dissemination')
 
     # Display the data
-    st.write('## Research Opportunities Posted (January - June 2024)')
+    st.write('## Research Opportunities Posted (January - Sept. 2025)')
     st.dataframe(df_research)
 
     # Visualizations
     st.write('## Visualizations')
 
     # Bar chart for Research Opportunities Posted over the first half of 2024
-    st.write("### Research Opportunities Posted (January - June 2024)")
+    st.write("### Research Opportunities Posted (January - Sept 2025)")
     fig, ax = plt.subplots(figsize=(12, 6))
     bar_width = 0.15
     bar_positions = np.arange(len(months))
@@ -50,7 +50,7 @@ def show_research_support_page():
 
     ax.set_xticks(bar_positions)
     ax.set_xticklabels(months)
-    ax.set_title('Research Opportunities Posted (January - June 2024)')
+    ax.set_title('Research Opportunities Posted (January - September 2025)')
     ax.set_xlabel('Month')
     ax.set_ylabel('Count')
     ax.legend()
@@ -58,13 +58,13 @@ def show_research_support_page():
     st.pyplot(fig)
 
     # Pie chart for Research Opportunities distribution in June 2024
-    st.write("### Research Opportunities Distribution in June 2024")
-    june_data = {
+    st.write("### Research Opportunities Distribution in September 2025")
+    Sept_data = {
         'Type': ['Grants', 'Innovation Grants', 'Conferences', 'Workshops & Fellowships', 'Scholarships'],
         'Count': [grants[-1], innovation_grants[-1], conferences[-1], workshops_fellowships[-1], scholarships[-1]]
     }
-    df_june = pd.DataFrame(june_data)
-    fig = px.pie(df_june, values='Count', names='Type', title='Research Opportunities Distribution in June 2024')
+    df_Sept = pd.DataFrame(Sept_data)
+    fig = px.pie(df_june, values='Count', names='Type', title='Research Opportunities Distribution in Sept 2025')
     fig.update_traces(pull=[0.1]*len(df_june), hole=0.3)
     st.plotly_chart(fig, use_container_width=True)
 
