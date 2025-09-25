@@ -58,13 +58,13 @@ def show_research_support_page():
     st.pyplot(fig)
 
     # Pie chart for Research Opportunities distribution in June 2024
-    st.write("### Research Opportunities Distribution in June 2024")
+    st.write("### Research Opportunities Distribution in September 2025")
     june_data = {
         'Type': ['Grants', 'Innovation Grants', 'Conferences', 'Workshops & Fellowships', 'Scholarships'],
         'Count': [grants[-1], innovation_grants[-1], conferences[-1], workshops_fellowships[-1], scholarships[-1]]
     }
     df_june = pd.DataFrame(june_data)
-    fig = px.pie(df_june, values='Count', names='Type', title='Research Opportunities Distribution in June 2024')
+    fig = px.pie(df_june, values='Count', names='Type', title='Research Opportunities Distribution in September 2025')
     fig.update_traces(pull=[0.1]*len(df_june), hole=0.3)
     st.plotly_chart(fig, use_container_width=True)
 
