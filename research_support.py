@@ -65,7 +65,7 @@ def show_research_support_page():
     }
     df_Sept = pd.DataFrame(Sept_data)
     fig = px.pie(df_june, values='Count', names='Type', title='Research Opportunities Distribution in Sept 2025')
-    fig.update_traces(pull=[0.1]*len(df_june), hole=0.3)
+    fig.update_traces(pull=[0.1]*len(df_Sept), hole=0.3)
     st.plotly_chart(fig, use_container_width=True)
 
     #st.write("### Tagline")
