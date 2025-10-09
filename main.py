@@ -2,6 +2,7 @@ import streamlit as st
 from PIL import Image
 import base64
 from research_support import show_research_support_page
+from partnerships import show_partnerships_page  # Import the partnerships function
 from admissions import show_admissions_page  # Import the admissions function
 from enrollment import show_enrollment_page
 from pillar1 import show_pillar1_page
@@ -28,6 +29,7 @@ if 'selected_sub_department' not in st.session_state:
 
 # Define a function to handle the login process
 def login(username, password):
+    st.set_page_config(layout="wide")  # full-width app
     if username == "Francis" and password == "password1234":
         st.session_state.logged_in = True
         st.session_state.username = username
@@ -259,7 +261,9 @@ def show_department_details_page():
                 elif subdivision == "Western Campus (Kisumu)":
                     st.session_state.page = "westerncampus" 
                 elif subdivision == "Kitengela Campus":
-                    st.session_state.page = "kitengelacampus"                    
+                    st.session_state.page = "kitengelacampus" 
+                elif subdivision == "Collaborations and Partnerships":
+                    st.session_state.page = "partnerships"                  
                 else:
                     st.write(f"{subdivision} Page still under Development...")
     if st.button("Back"):
@@ -306,3 +310,5 @@ else:
         show_westerncampus_page()  # Call the function from the imported moduleshow_staffcount_page
     elif st.session_state.page == "kitengelacampus":
         show_kitengelacampus_page()  # Call the function from the imported moduleshow_staffcount_page
+    elif st.session_state.page == "partnerships":
+        show_partnerships_page()  # Call the function from the imported module
